@@ -1,0 +1,9 @@
+version: '2'
+services:
+  app-service:
+    ports:
+      - "5000:5000"
+    image: bittrex_service:1.0
+    volumes:
+      - /apps/logs/appService:/apps/logs/appService
+    container_name: app-service
