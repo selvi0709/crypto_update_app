@@ -1,9 +1,9 @@
 import logging
 from flask import Flask
 from flask_restful import Api
-# from bittrex_app_src.config_parse import ConfigParse
-from config_parse import ConfigParse
-from summary import Summary, SymbolSummary
+from bittrex_app_src.config_parse import ConfigParse
+# from config_parse import ConfigParse
+from bittrex_app_src.summary import Summary, SymbolSummary
 
 logger = logging.getLogger("app")
 
@@ -52,7 +52,7 @@ def start_service():
     if config:
         api = Api(app)
         resources(api, logger, config)
-        app.run()
+        app.run(host='0.0.0.0')
 
 
 if __name__ == '__main__':
