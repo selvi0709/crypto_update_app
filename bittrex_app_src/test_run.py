@@ -1,6 +1,6 @@
-from config_parse import ConfigParse
-from summary import Summary, SymbolSummary
-from app import resources
+from bittrex_app_src.config_parse import ConfigParse
+from bittrex_app_src.summary import Summary, SymbolSummary
+from bittrex_app_src.app import resources
 from unittest.mock import MagicMock, patch
 
 
