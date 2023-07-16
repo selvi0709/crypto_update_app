@@ -1,0 +1,84 @@
+openapi: 3.0.0
+info:
+  title: Bittrex API
+  description: API documentation for Bittrex endpoints
+  version: 1.0.0
+tags:
+  - name: Market Summary
+    description: Queries crypto market updates
+
+paths:
+  /api.bittrex.com/v3/markets/summaries:
+    get:
+      tags:
+        - Market Summary
+      summary: Get market information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MarketSummary'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  /api.bittrex.com/v3/markets/{marketSymbol}:
+    parameters:
+      - name: marketSymbol
+        in: path
+        description: The symbol of the market
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - Market Summary
+      summary: Get summary information for a specific market
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketSummary'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+components:
+  schemas:
+    MarketSummary:
+      type: object
+      properties:
+        symbol:
+          type: string
+        high:
+          type: string
+        low:
+          type: string
+        volume:
+          type: string
+        quoteVolume:
+          type: string
+        percentChange:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+  responses:
+    NotFound:
+      description: The specified resource was not found
+    InternalServerError:
+      description: Internal server error
+    UnexpectedError:
+      description: Unexpected error
